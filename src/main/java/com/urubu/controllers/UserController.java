@@ -1,7 +1,7 @@
 package com.urubu.controllers;
 
 
-import com.urubu.model.User;
+import com.urubu.domain.User;
 import com.urubu.repositories.UserRepository;
 import com.urubu.requests.RequestUser;
 import org.springframework.beans.factory.annotation.Autowired;

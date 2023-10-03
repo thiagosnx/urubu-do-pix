@@ -1,4 +1,4 @@
-package com.urubu.model;
+package com.urubu.domain;
 
 
 import com.urubu.requests.RequestUser;

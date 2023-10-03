@@ -1,4 +1,6 @@
 package com.urubu.requests;
 
-public record RequestUser(String id, String username) {
+import java.math.BigDecimal;
+
+public record RequestUser(String id, String username, BigDecimal balance) {
 }

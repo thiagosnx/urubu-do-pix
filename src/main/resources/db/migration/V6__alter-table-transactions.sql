@@ -1,0 +1,6 @@
+ALTER TABLE transactions
+ADD COLUMN timenow TEXT,
+ADD COLUMN order_id TEXT,
+ADD COLUMN type TEXT,
+ADD COLUMN amount INT,
+ADD COLUMN users TEXT;

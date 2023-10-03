@@ -1,0 +1,2 @@
+ALTER TABLE urubu
+ADD COLUMN balance INT;

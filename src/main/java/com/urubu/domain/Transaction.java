@@ -1,11 +1,13 @@
 package com.urubu.domain;
 
+import com.urubu.requests.RequestTransaction;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -17,17 +19,22 @@ import java.time.LocalDateTime;
 @Table(name = "transactions")
 public class Transaction {
     @Id @GeneratedValue(strategy = GenerationType.UUID)
-    private String orderId;
+    private String order_id;
 
     @Enumerated(EnumType.STRING)
-    private TransactionType typeTransaction;
+    private TransactionType type;
 
     @Column(nullable = false)
-    private Integer valueTransaction;
+    private BigDecimal amount;
 
     @ManyToOne
-    private User username;
+    private User users;
 
-    private LocalDateTime timestamp;
+    private LocalDateTime timenow;
 
+    public Transaction(RequestTransaction requestTransaction) {
+        this.amount = requestTransaction.amount();
+        this.type = requestTransaction.type();
+
+    }
 }

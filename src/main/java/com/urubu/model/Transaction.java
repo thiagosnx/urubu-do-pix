@@ -10,16 +10,18 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
-@Entity
-@Table(name = "urubu")
-
+@Entity(name = "transactions")
+@Table(name = "transactions")
 public class Transaction {
     @Id @GeneratedValue(strategy = GenerationType.UUID)
-    String orderId;
+    private String orderId;
 
-    String typeTransaction;
+    @Column(nullable = false)
+    private String typeTransaction;
+    @Column(nullable = false)
+    private Integer valueTransaction;
 
-    Integer valueTransaction;
+    @ManyToOne
+    private User username;
 
 }

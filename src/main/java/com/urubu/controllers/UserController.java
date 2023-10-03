@@ -1,12 +1,13 @@
 package com.urubu.controllers;
 
 
+import com.urubu.model.User;
 import com.urubu.repositories.UserRepository;
+import com.urubu.requests.RequestUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
@@ -19,4 +20,14 @@ public class UserController {
     public ResponseEntity getUsers(){
         return ResponseEntity.ok(userRepository.findAll());
     }
+
+    @PostMapping
+    public ResponseEntity registerUser(@RequestBody @Validated RequestUser data){
+        User newUser = new User(data);
+        userRepository.save(newUser);
+
+        return ResponseEntity.ok("Vítima cadastrada com sucesso!");
+    }
+
+
 }

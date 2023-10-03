@@ -1,6 +1,7 @@
 package com.urubu.model;
 
 
+import com.urubu.requests.RequestUser;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,9 +16,12 @@ import lombok.Setter;
 @Table(name = "urubu")
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.UUID)
-    String id;
+    private String id;
 
     @Column(nullable = false, unique = true)
-    String username;
+    private String username;
 
+    public User(RequestUser requestUser) {
+        this.username = requestUser.username();
+    }
 }

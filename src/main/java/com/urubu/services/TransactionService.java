@@ -4,6 +4,7 @@ import com.urubu.domain.Transaction;
 import com.urubu.domain.User;
 import com.urubu.repositories.TransactionRepository;
 import com.urubu.requests.RequestTransaction;
+import com.urubu.requests.RequestUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,8 @@ public class TransactionService {
     @Autowired
     private UserService userService;
 
-    public void createTransaction(RequestTransaction transaction) throws Exception {
-        User user = this.userService.findUserById(transaction.users().getId());
+    public Transaction createTransaction(RequestTransaction transaction, RequestUser username) throws Exception {
+        User user = this.userService.findUserById(username.id());
 
         Transaction newTransaction = new Transaction();
         newTransaction.setUsers(user);
@@ -29,6 +30,8 @@ public class TransactionService {
 
         repository.save(newTransaction);
         userService.saveUser(user);
+
+        return newTransaction;
 
     }
 

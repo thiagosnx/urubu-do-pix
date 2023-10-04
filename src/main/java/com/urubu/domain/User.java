@@ -28,5 +28,6 @@ public class User {
 
     public User(RequestUser requestUser) {
         this.username = requestUser.username();
+        this.balance = requestUser.balance();
     }
 }

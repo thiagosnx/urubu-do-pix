@@ -28,6 +28,7 @@ public class Transaction {
     private BigDecimal amount;
 
     @ManyToOne
+    @JoinColumn(name="users_id")
     private User users;
 
     private LocalDateTime timenow;

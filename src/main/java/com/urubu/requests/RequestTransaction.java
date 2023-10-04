@@ -6,6 +6,6 @@ import com.urubu.domain.User;
 
 import java.math.BigDecimal;
 
-public record RequestTransaction(String order_id, TransactionType type, BigDecimal amount, User users) {
+public record RequestTransaction(String order_id, TransactionType type, BigDecimal amount, String userId) {
 
 }

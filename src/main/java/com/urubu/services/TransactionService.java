@@ -1,6 +1,7 @@
 package com.urubu.services;
 
 import com.urubu.domain.Transaction;
+import com.urubu.domain.TransactionType;
 import com.urubu.domain.User;
 import com.urubu.repositories.TransactionRepository;
 import com.urubu.requests.RequestTransaction;
@@ -18,18 +19,23 @@ public class TransactionService {
     @Autowired
     private UserService userService;
 
-    public Transaction createTransaction(RequestTransaction transaction, RequestUser username) throws Exception {
-        User user = this.userService.findUserById(username.id());
+    public Transaction createTransaction(RequestTransaction transaction) throws Exception {
+        User user = this.userService.findUserById(transaction.userId());
 
         Transaction newTransaction = new Transaction();
-        newTransaction.setUsers(user);
         newTransaction.setAmount(transaction.amount());
+        newTransaction.setUsers(user);
         newTransaction.setTimenow(LocalDateTime.now());
 
-        user.setBalance(user.getBalance().add(transaction.amount()));
+        if(transaction.type() == TransactionType.DEPOSIT) {
+            user.setBalance(user.getBalance().add(transaction.amount()));
+        }
+        if(transaction.type() == TransactionType.WITHDRAW){
+            user.setBalance(user.getBalance().subtract(transaction.amount()));
+        }
 
-        repository.save(newTransaction);
-        userService.saveUser(user);
+        this.repository.save(newTransaction);
+        this.userService.saveUser(user);
 
         return newTransaction;
 

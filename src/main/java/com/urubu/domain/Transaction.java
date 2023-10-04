@@ -1,6 +1,6 @@
 package com.urubu.domain;
 
-import com.urubu.requests.RequestTransaction;
+import com.urubu.dtos.TransactionDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -29,13 +28,13 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name="users_id")
-    private User users;
+    private User users; //user que fará a transação puxando direto da classe User
 
     private LocalDateTime timenow;
 
-    public Transaction(RequestTransaction requestTransaction) {
-        this.amount = requestTransaction.amount();
-        this.type = requestTransaction.type();
+    public Transaction(TransactionDTO transactionDTO) {
+        this.amount = transactionDTO.amount();
+        this.type = transactionDTO.type();
 
     }
 }

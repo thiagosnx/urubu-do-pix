@@ -2,7 +2,7 @@ package com.urubu.services;
 
 import com.urubu.domain.User;
 import com.urubu.repositories.UserRepository;
-import com.urubu.requests.RequestUser;
+import com.urubu.dtos.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class UserService {
     }
 
 
-    public User createUser(RequestUser data){
+    public User createUser(UserDTO data){
         User newUser = new User(data);
         this.saveUser(newUser);
 

@@ -3,7 +3,7 @@ package com.urubu.controllers;
 
 import com.urubu.domain.User;
 import com.urubu.repositories.UserRepository;
-import com.urubu.requests.RequestUser;
+import com.urubu.dtos.UserDTO;
 import com.urubu.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity registerUser(@RequestBody @Validated RequestUser user){
+    public ResponseEntity registerUser(@RequestBody @Validated UserDTO user){
         User newUser = userService.createUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }

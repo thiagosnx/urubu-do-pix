@@ -1,7 +1,7 @@
 package com.urubu.domain;
 
 
-import com.urubu.requests.RequestUser;
+import com.urubu.dtos.UserDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,8 +26,8 @@ public class User {
     private BigDecimal balance;
 
 
-    public User(RequestUser requestUser) {
-        this.username = requestUser.username();
-        this.balance = requestUser.balance();
+    public User(UserDTO userDTO) {
+        this.username = userDTO.username();
+        this.balance = userDTO.balance();
     }
 }

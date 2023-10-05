@@ -6,6 +6,7 @@ import com.urubu.domain.User;
 import com.urubu.repositories.TransactionRepository;
 import com.urubu.dtos.TransactionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -28,14 +29,18 @@ public class TransactionService {
         newTransaction.setUsers(user);
         newTransaction.setTimenow(LocalDateTime.now());
 
+
+
         if(transaction.type() == TransactionType.DEPOSIT) {
             user.setBalance(user.getBalance().add(transaction.amount()));
             //adiciona o amount do body ao balance do user
         }
-        if(transaction.type() == TransactionType.WITHDRAW){
+        else if(transaction.type() == TransactionType.WITHDRAW && user.getBalance().compareTo(transaction.amount())>= 0) {
+            //validação, so saca se tiver dinheiro na conta, verifica se o userBalance é maior ou igual ao amount do saque
             user.setBalance(user.getBalance().subtract(transaction.amount()));
             //subtrai o amount do body do balance do user
-            //fazer exception para saque maior q o saldo
+        }else {
+            throw new RuntimeException("Saldo insuficiente!");
         }
 
         this.repository.save(newTransaction);//salva a transação

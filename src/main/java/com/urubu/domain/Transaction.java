@@ -30,7 +30,7 @@ public class Transaction {
     @JoinColumn(name="users_id")
     private User users; //user que fará a transação puxando direto da classe User
 
-    private LocalDateTime timenow;
+    private LocalDateTime date_time;
 
     private BigDecimal balance_before;
 

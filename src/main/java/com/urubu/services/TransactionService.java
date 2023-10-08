@@ -36,7 +36,7 @@ public class TransactionService {
         newTransaction.setAmount(transaction.amount());
         newTransaction.setType(transaction.type());
         newTransaction.setUsers(user);
-        newTransaction.setTimenow(LocalDateTime.now());
+        newTransaction.setDate_time(LocalDateTime.now());
 
 
 

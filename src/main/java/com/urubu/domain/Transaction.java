@@ -32,6 +32,8 @@ public class Transaction {
 
     private LocalDateTime timenow;
 
+    private BigDecimal balance_before;
+
     public Transaction(TransactionDTO transactionDTO) {
         this.amount = transactionDTO.amount();
         this.type = transactionDTO.type();

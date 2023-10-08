@@ -6,10 +6,11 @@ import com.urubu.domain.User;
 import com.urubu.repositories.TransactionRepository;
 import com.urubu.dtos.TransactionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class TransactionService {
@@ -19,11 +20,19 @@ public class TransactionService {
     @Autowired
     private UserService userService;
 
+    public List<Transaction> getTransactions(){
+        return this.repository.findAll();
+    }
+//    public Transaction findByOrderId(String order_id) throws Exception {
+//        return this.repository.findByOrderId(order_id).orElseThrow(() -> new Exception("Transação não encontrada"));
+//    }
+
     public Transaction createTransaction(TransactionDTO transaction) throws Exception {
         User user = this.userService.findUserById(transaction.userId());
         //criando um user para usar um User que será mapeado pelo Id dele
 
         Transaction newTransaction = new Transaction();//instanciando a classe para setar o body
+        newTransaction.setBalance_before(user.getBalance());
         newTransaction.setAmount(transaction.amount());
         newTransaction.setType(transaction.type());
         newTransaction.setUsers(user);

@@ -26,6 +26,8 @@ public class User {
     private BigDecimal balance;
 
 
+
+
     public User(UserDTO userDTO) {
         this.username = userDTO.username();
         this.balance = userDTO.balance();

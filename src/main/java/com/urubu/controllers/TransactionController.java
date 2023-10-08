@@ -30,15 +30,15 @@ public class TransactionController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Transaction>> findByOrderId(){
+    public ResponseEntity<List<Transaction>> getTransactions(){
         List<Transaction> allTransactions = this.transactionService.getTransactions();
         return new ResponseEntity<>(allTransactions, HttpStatus.OK);
     }
 
-//    @GetMapping ("/{orderId}")
-//    public ResponseEntity<Transaction> getTransactionByOrderId(@PathVariable String order_id) throws Exception {
-//        Transaction transactionsByOrderId = this.transactionService.findByOrderId(order_id);
-//        return new ResponseEntity<>(transactionsByOrderId,HttpStatus.OK);
-//
-//    }
+    @GetMapping ("/{order_id}")
+    public ResponseEntity<Transaction> findById(@PathVariable String order_id) throws Exception {
+        Transaction transactionsByOrderId = this.transactionService.findById(order_id);
+        return new ResponseEntity<>(transactionsByOrderId,HttpStatus.OK);
+
+    }
 }

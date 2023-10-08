@@ -23,9 +23,10 @@ public class TransactionService {
     public List<Transaction> getTransactions(){
         return this.repository.findAll();
     }
-//    public Transaction findByOrderId(String order_id) throws Exception {
-//        return this.repository.findByOrderId(order_id).orElseThrow(() -> new Exception("Transação não encontrada"));
-//    }
+
+    public Transaction findById(String order_id) throws Exception {
+        return this.repository.findById(order_id).orElseThrow(() -> new Exception("Transação não encontrada"));
+    }
 
     public Transaction createTransaction(TransactionDTO transaction) throws Exception {
         User user = this.userService.findUserById(transaction.userId());

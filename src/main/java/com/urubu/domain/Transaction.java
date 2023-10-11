@@ -34,6 +34,8 @@ public class Transaction {
 
     private BigDecimal balance_before;
 
+//    private String username;
+
     public Transaction(TransactionDTO transactionDTO) {
         this.amount = transactionDTO.amount();
         this.type = transactionDTO.type();

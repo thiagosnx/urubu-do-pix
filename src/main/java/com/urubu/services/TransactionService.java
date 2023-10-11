@@ -3,6 +3,7 @@ package com.urubu.services;
 import com.urubu.domain.Transaction;
 import com.urubu.domain.TransactionType;
 import com.urubu.domain.User;
+import com.urubu.dtos.UserDTO;
 import com.urubu.repositories.TransactionRepository;
 import com.urubu.dtos.TransactionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ public class TransactionService {
     @Autowired
     private TransactionRepository repository;
 
+
     @Autowired
     private UserService userService;
 
@@ -27,6 +29,11 @@ public class TransactionService {
     public Transaction findById(String order_id) throws Exception {
         return this.repository.findById(order_id).orElseThrow(() -> new Exception("Transação não encontrada"));
     }
+
+//    public Transaction findUserByUsername(UserDTO userDTO) throws Exception{
+//        User user = this.userService.findUserByUsername(userDTO.username());
+//        return findUserByUsername(userDTO);
+//    }
 
     public Transaction createTransaction(TransactionDTO transaction) throws Exception {
         User user = this.userService.findUserById(transaction.userId());
@@ -41,16 +48,21 @@ public class TransactionService {
 
 
 
+
+
+
+
         if(transaction.type() == TransactionType.DEPOSIT) {
             user.setBalance(user.getBalance().add(transaction.amount()));
-            //adiciona o amount do body ao balance do user
         }
-        else if(transaction.type() == TransactionType.WITHDRAW && user.getBalance().compareTo(transaction.amount())>= 0) {
-            //validação, so saca se tiver dinheiro na conta, verifica se o userBalance é maior ou igual ao amount do saque
-            user.setBalance(user.getBalance().subtract(transaction.amount()));
-            //subtrai o amount do body do balance do user
+        else if(transaction.type() == TransactionType.WITHDRAW){
+            if(user.getBalance().compareTo(transaction.amount())>= 0) {
+                user.setBalance(user.getBalance().subtract(transaction.amount()));
+            }else {
+                throw new RuntimeException("Saldo insuficiente.");
+            }
         }else {
-            throw new RuntimeException("Saldo insuficiente!");
+            throw new RuntimeException("Tipo inválido. Escolha DEPOSIT ou WITHDRAW.");
         }
 
         this.repository.save(newTransaction);//salva a transação

@@ -2,6 +2,7 @@ package com.urubu.controllers;
 
 import com.urubu.domain.Transaction;
 import com.urubu.domain.User;
+import com.urubu.dtos.UserDTO;
 import com.urubu.repositories.TransactionRepository;
 import com.urubu.dtos.TransactionDTO;
 import com.urubu.services.TransactionService;
@@ -41,4 +42,11 @@ public class TransactionController {
         return new ResponseEntity<>(transactionsByOrderId,HttpStatus.OK);
 
     }
+
+//    @GetMapping("/find/{username}")
+//    public ResponseEntity<List<Transaction>> findUserByUsername(@PathVariable UserDTO username) throws Exception{
+//        Transaction findByUsers = this.transactionService..(username);
+//        return new ResponseEntity<List>(findByUsers, HttpStatus.OK);
+//    }
+
 }

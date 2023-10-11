@@ -17,6 +17,10 @@ public class UserService {
         return this.repository.findUserById(id).orElseThrow(() -> new Exception("Usuário não encontrado"));
     }
 
+//    public User findUserByUsername(String username)throws Exception{
+//       return this.repository.findUserByUsername(username).orElseThrow(() -> new Exception("Usuário não encontrado"));
+//    }
+
 
     public User createUser(UserDTO data){
         User newUser = new User(data);

@@ -48,10 +48,6 @@ public class TransactionService {
 
 
 
-
-
-
-
         if(transaction.type() == TransactionType.DEPOSIT) {
             user.setBalance(user.getBalance().add(transaction.amount()));
         }
@@ -59,10 +55,10 @@ public class TransactionService {
             if(user.getBalance().compareTo(transaction.amount())>= 0) {
                 user.setBalance(user.getBalance().subtract(transaction.amount()));
             }else {
-                throw new RuntimeException("Saldo insuficiente.");
+                throw new Exception("Saldo insuficiente.");
             }
-        }else {
-            throw new RuntimeException("Tipo inválido. Escolha DEPOSIT ou WITHDRAW.");
+        }else{
+            throw new Exception("Tipo inválido. Escolha DEPOSIT ou WITHDRAW.");
         }
 
         this.repository.save(newTransaction);//salva a transação

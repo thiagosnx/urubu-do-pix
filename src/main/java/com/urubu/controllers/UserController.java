@@ -1,10 +1,12 @@
 package com.urubu.controllers;
 
 
+import com.urubu.domain.Transaction;
 import com.urubu.domain.User;
 import com.urubu.repositories.UserRepository;
 import com.urubu.dtos.UserDTO;
 import com.urubu.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,10 +31,13 @@ public class UserController {
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
 
+
+
     @PostMapping
-    public ResponseEntity registerUser(@RequestBody @Validated UserDTO user){
+    public ResponseEntity registerUser(@RequestBody @Valid UserDTO user){
         User newUser = userService.createUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+
     }
 
 

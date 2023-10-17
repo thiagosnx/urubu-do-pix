@@ -32,4 +32,9 @@ public class User {
         this.username = userDTO.username();
         this.balance = userDTO.balance();
     }
+
+//    public User(String id, String username, Double balance) {
+//        this.username = username;
+//        this.balance = getBalance();
+//    }
 }

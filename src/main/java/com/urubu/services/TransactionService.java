@@ -6,12 +6,15 @@ import com.urubu.domain.User;
 import com.urubu.dtos.UserDTO;
 import com.urubu.repositories.TransactionRepository;
 import com.urubu.dtos.TransactionDTO;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class TransactionService {
@@ -27,13 +30,12 @@ public class TransactionService {
     }
 
     public Transaction findById(String order_id) throws Exception {
-        return this.repository.findById(order_id).orElseThrow(() -> new Exception("Transação não encontrada"));
+        return this.repository.findById(order_id).orElseThrow(() -> new Exception("Transação não encontrada!"));
     }
 
-//    public Transaction findUserByUsername(UserDTO userDTO) throws Exception{
-//        User user = this.userService.findUserByUsername(userDTO.username());
-//        return findUserByUsername(userDTO);
-//    }
+    public List<Transaction> findByUsersUsername(String username) throws Exception {
+            return this.repository.findByUsersUsername(username).orElseThrow(() -> new Exception("Usuário não encontrado!"));
+    }
 
     public Transaction createTransaction(TransactionDTO transaction) throws Exception {
         User user = this.userService.findUserById(transaction.userId());

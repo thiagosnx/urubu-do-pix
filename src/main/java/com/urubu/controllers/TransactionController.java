@@ -42,11 +42,11 @@ public class TransactionController {
         return new ResponseEntity<>(transactionsByOrderId,HttpStatus.OK);
 
     }
-
-//    @GetMapping("/find/{username}")
-//    public ResponseEntity<List<Transaction>> findUserByUsername(@PathVariable UserDTO username) throws Exception{
-//        Transaction findByUsers = this.transactionService..(username);
-//        return new ResponseEntity<List>(findByUsers, HttpStatus.OK);
-//    }
+    @GetMapping("/search/{username}")
+    public ResponseEntity<List<Transaction>> getByUsersUsername(@PathVariable String username) throws Exception{
+        List<Transaction> usersByUsername = this.transactionService.findByUsersUsername(username);
+        return new ResponseEntity<>(usersByUsername, HttpStatus.OK);
+    //pesquisando as transações do usuario
+    }
 
 }

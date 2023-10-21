@@ -25,6 +25,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers(){
         List<User> allUsers = this.userService.getAllUsers();
@@ -33,6 +35,7 @@ public class UserController {
 
 
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping
     public ResponseEntity registerUser(@RequestBody @Valid UserDTO user){
         User newUser = userService.createUser(user);

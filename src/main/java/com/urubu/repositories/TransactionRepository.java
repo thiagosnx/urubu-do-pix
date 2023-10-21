@@ -13,6 +13,4 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
     Optional<Transaction> findById(String order_id);
 
     Optional<List<Transaction>> findByUsersUsername(String username);
-
-
 }

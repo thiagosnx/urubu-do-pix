@@ -9,4 +9,4 @@ Até o momento é possível:
 Cadastrar usuários que recebem um ID único.
 Realizar transferências de depósito e saque a partir desse ID.
 
-Qualquer ajuda é bem-vinda.
+Qualquer ajuda é bem-vinda..
